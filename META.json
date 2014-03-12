@@ -61,6 +61,17 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/mozquito/Mojolicious-Plugin-Korpokkur/issues"
+      },
+      "homepage" : "https://github.com/mozquito/Mojolicious-Plugin-Korpokkur",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/mozquito/Mojolicious-Plugin-Korpokkur.git",
+         "web" : "https://github.com/mozquito/Mojolicious-Plugin-Korpokkur"
+      }
+   },
    "version" : "0.01",
    "x_contributors" : [
       "shinichi butani <mozquito@me.com>"
