@@ -1,0 +1,20 @@
+#!perl
+use utf8;
+use strict;
+use warnings;
+use lib qw(./lib);
+use Mojolicious::Lite;
+use Cwd 'getcwd';
+
+app->home->parse(getcwd);
+shift @{ app->static->paths };
+unshift @{ app->static->paths }, app->home->rel_dir('public');
+shift @{ app->renderer->paths };
+unshift @{ app->renderer->paths }, app->home->rel_dir('templates');
+plugin 'PODRenderer';
+plugin 'Korpokkur';
+
+get '/' => sub {
+    shift->redirect_to('/index.html');
+};
+app->start;

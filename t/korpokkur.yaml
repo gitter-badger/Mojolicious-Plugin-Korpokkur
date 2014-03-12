@@ -1,0 +1,6 @@
+site_name: sitename
+handler: ep
+plugins:
+  xslate_renderer:
+    template_options:
+      syntax: TTerse

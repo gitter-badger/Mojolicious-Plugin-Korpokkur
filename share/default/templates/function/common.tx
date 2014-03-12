@@ -1,0 +1,43 @@
+:# url_rel
+:macro url_rel -> $name {
+:if($name.match(rx('^http'))){
+:$name
+:}else{
+:$c.url_rel($name);
+:}
+:}
+:macro js -> $itr {
+:for $itr -> $row {
+<script type="text/javascript" src="<:$row | url_rel:>"></script>
+:}
+:}
+:macro css -> $itr {
+:for $itr -> $row {
+<link rel="stylesheet" href="<:$row | url_rel:>" type="text/css" media="screen">
+:}
+:}
+:macro img -> $src {
+:my $size = $c.image_size($src.src);
+:my $result = $src.merge({width=>$size[0],height=>$size[1],src=>url_rel($src.src)});
+:tag('img',$result)();
+:}
+:macro text_list -> $itr {
+:for $itr -> $row {
+:if($row[1]){
+:$row[0] | tag('a',{href=>url_rel($row[1]),target=>'_parent'}) | tag('li');
+:}else{
+:$row[0] | tag('li');
+:}
+:}
+:}
+:macro image_list -> $itr {
+:for $itr -> $row {
+:if($row[2]){
+:my $link = $row[3] ? {href=>url_rel($row[2]),target=>'_parent'}.merge($row[3]) :  {href=>url_rel($row[2]),target=>'_parent'};
+:img({src=>$row[0],alt=>$row[1]}) |tag('a',$link)| tag('li');
+:}else{
+:img({src=>$row[0],alt=>$row[1]}) | tag('li');
+:}
+:}
+:}
+

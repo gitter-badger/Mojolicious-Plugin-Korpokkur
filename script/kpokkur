@@ -1,0 +1,15 @@
+#!perl
+
+use strict;
+use warnings;
+use FindBin;
+use File::Spec::Functions qw(catfile);
+my $dir   = $FindBin::Bin;
+my $morbo = catfile( $dir, 'morbo' );
+my $app   = catfile( $dir, 'pokkur' );
+
+push( @ARGV,
+    qw{-w=templates -w=lib -w=stash -w=sitemap.yaml -w=korpokkur.yaml} );
+push( @ARGV, $app );
+require $morbo;
+

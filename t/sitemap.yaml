@@ -1,0 +1,10 @@
+p1:
+  title: title_index
+  path: index.html
+p2:
+  title: url_rel
+  path: url_rel/index.html
+p3:
+  title: title_yaml
+  path: use/yaml.html
+  no_publish: false

@@ -1,0 +1,7 @@
+p1:
+  title: sample html
+  description: meta description
+  keywords: meta keywords
+  h1: sample page
+  template: base
+  path: index.html

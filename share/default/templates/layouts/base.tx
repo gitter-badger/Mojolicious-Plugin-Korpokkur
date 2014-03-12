@@ -1,0 +1,22 @@
+:cascade with function::common;
+<html lang="jp">
+<head>
+  <meta charset="UTF-8">
+  <title><:$title:></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="description" content="<:$description:>">
+  <meta name="keywords" content="<:$keywords:>">
+:$korpokkur.css | css;
+:$korpokkur.script | js;
+</head>
+<body>
+:block header ->{
+:}
+:block main ->{
+:$section | markdown(1);
+:}
+:block footer ->{
+:}
+</body>
+</html>
+
