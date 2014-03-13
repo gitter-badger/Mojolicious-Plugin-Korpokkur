@@ -120,7 +120,7 @@ sub load_plugin {
     my ( $self, $app, $plugins ) = @_;
     return unless $plugins;
     if ( ref $plugins eq 'HASH' ) {
-        for my $plugin ( keys $plugins ) {
+        for my $plugin ( keys %{$plugins} ) {
             $app->plugin( $plugin, $plugins->{$plugin} );
         }
     }
