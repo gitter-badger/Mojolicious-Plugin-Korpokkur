@@ -9,7 +9,7 @@ use File::HomeDir;
 use Path::Tiny;
 use utf8;
 use Image::Size ();
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 local $YAML::Syck::ImplicitUnicode = 1;
 
 sub register {

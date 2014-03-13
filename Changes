@@ -2,6 +2,9 @@ Reviision history for Perl extension Mojolicious-Plugin-Korpokkur
 
 {{$NEXT}}
 
+0.02 2014-03-13T03:47:49Z
+   - 5.14以前にエラーがでるのを対処。
+
 0.01 2014-03-12T11:58:28Z
     - 最初のリリース。
     - theme機能

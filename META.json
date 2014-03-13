@@ -45,6 +45,7 @@
          "requires" : {
             "File::Copy::Recursive" : "0",
             "File::HomeDir" : "0",
+            "File::ShareDir" : "0",
             "Image::Size" : "0",
             "MojoX::Renderer::Xslate" : "0",
             "Mojolicious" : "0",
@@ -72,7 +73,7 @@
          "web" : "https://github.com/mozquito/Mojolicious-Plugin-Korpokkur"
       }
    },
-   "version" : "0.01",
+   "version" : "0.02",
    "x_contributors" : [
       "shinichi butani <mozquito@me.com>"
    ]
