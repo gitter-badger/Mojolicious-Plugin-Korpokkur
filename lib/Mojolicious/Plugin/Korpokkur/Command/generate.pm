@@ -1,6 +1,6 @@
 package Mojolicious::Plugin::Korpokkur::Command::generate;
 use Mojo::Base 'Mojolicious::Command::generate';
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 has namespaces => sub { ['Mojolicious::Plugin::Korpokkur::Command::generate'] };
 
 
