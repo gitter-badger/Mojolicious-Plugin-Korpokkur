@@ -41,97 +41,55 @@ sub run {
 
     if ( !$theme ) {
         my $default_path = $self->{default_path};
-        $self->{config}->{plugins}->{xslate_renderer} = $self->{xslate};
-        my $korpokkur = YAML::Syck::Dump( $self->{config} );
-        $self->write_file(
-            catfile( $self->app->home, $name, 'korpokkur.yaml' ),
-            $korpokkur );
-        File::Copy::copy( catfile( $default_path, 'sitemap.yaml' ),
-            "$name/sitemap.yaml" );
-        say '  [create] sitemap.yaml';
-        File::Copy::copy( catfile( $default_path, 'readme.txt' ),
-            "$name/readme.txt" );
-        say '  [create] readme.txt';
-        $self->set_base;
-
+        rcopy( $default_path, $self->{my_site} );
+        
+        say "  [setup] successfully created skeleton";
     }
     elsif ( -d $theme_directory ) {
         $self->set_theme( $theme_directory, $theme );
-        say "  [setup] theme: $theme";
     }
     else {
         say "  [error] theme not found";
     }
 }
 
-sub set_base {
-    my $self = shift;
-
-    rcopy(
-        catdir( dist_dir('Mojolicious-Plugin-Korpokkur'), '/default', 'lib' ),
-        catdir( $self->{my_site},                         'lib' )
-    );
-    say '  [create] lib';
-    rcopy(
-        catdir(
-            dist_dir('Mojolicious-Plugin-Korpokkur'), '/default',
-            'templates'
-        ),
-        catdir( $self->{my_site}, 'templates' )
-    );
-    say '  [create] templates';
-
-    rcopy(
-        catdir(
-            dist_dir('Mojolicious-Plugin-Korpokkur'),
-            '/default', 'stash'
-        ),
-        catdir( $self->{my_site}, 'stash' )
-    );
-    say '  [create] stash';
-
-    rcopy(
-        catdir(
-            dist_dir('Mojolicious-Plugin-Korpokkur'), '/default',
-            'publis'
-        ),
-        catdir( $self->{my_site}, 'public' )
-    );
-
-    say '  [create] public';
-
+sub dir_copy {
+    my ( $self, $dir ) = @_;
+    my $dist_dir = $self->{default_path};
+    rcopy( catdir( $dist_dir, $dir ), catdir( $self->{my_site}, $dir ) );
+    say '  [create] ' . $dir;
 }
 
 sub set_theme {
     my ( $self, $theme_directory, $theme ) = @_;
-    my $public_dir = catdir( $theme_directory, 'public' );
-    rcopy( $public_dir, catdir( $self->{my_site}, 'public' ) )
-        if ( -d $public_dir );
-
-    my $lib_dir = catdir( $theme_directory, 'lib' );
-    if ( -d $lib_dir ) {
-        rcopy( $lib_dir, catdir( $self->{my_site}, 'lib' ) );
+    
+    my @install = qw(public lib stash readme.txt sitemap.yaml  );
+    for my $install (@install) {
+        my $dir = catdir( $theme_directory, $install );
+        if ( -d $dir ) {
+            rcopy( $dir, catdir( $self->{my_site}, $install ) );
+        }
+        else {
+            $self->dir_copy($install);
+        }
     }
-    else {
-        rcopy(
-            catdir( $self->{default_path}, 'lib' ),
-            catdir( $self->{my_site},      'lib' )
-        );
-    }
-    $self->{xslate}->{template_options}->{path} = [
+    my $korpokkur = catdir($theme_directory,'korpokkur.yaml');
+    if(-d $korpokkur){
+      rcopy($korpokkur,catdir($self->{my_site},'korpokkur.yaml'));
+    }else{
+      $self->{xslate}->{template_options}->{path} = [
         catdir( $self->{my_site}, 'templates' ),
         catdir( $theme_directory, 'templates' )
-    ];
+      ];
 
-    $self->{config}->{plugins}->{xslate_renderer} = $self->{xslate};
-    my $korpokkur = YAML::Syck::Dump( $self->{config} );
-    $self->write_file( catfile( $self->{my_site}, 'korpokkur.yaml' ),
+      $self->{config}->{plugins}->{xslate_renderer} = $self->{xslate};
+      my $korpokkur = YAML::Syck::Dump( $self->{config} );
+      $self->write_file( catfile( $self->{my_site}, 'korpokkur.yaml' ),
         $korpokkur );
-    say "  [setup] theme: $theme";
+
+    
+    }
+    say "  [setup] successfully created skeleton: $theme";
 }
 1;
-__DATA__
-@@ sitemap
-
-
 
