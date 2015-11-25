@@ -1,5 +1,7 @@
 # NAME
 
+[![Join the chat at https://gitter.im/mozquito/Mojolicious-Plugin-Korpokkur](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mozquito/Mojolicious-Plugin-Korpokkur?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Mojolicious::Plugin::Korpokkur - Mojolicious Plugin
 
 # SYNOPSIS
